@@ -46,12 +46,15 @@ int main(int argc, char *argv[]) {
         // Child
         for (int i = 0; i < 100000; ++i) {
             read(pipe_fds[0], buf, 1);
+            write(pipe_fds[1], buf, 1);
         }
         return 0;
     } else {
+        char buf[1];
         // Parent
         for (int i = 0; i < 100000; ++i) {
             write(pipe_fds[1], "b", 1);
+            read(pipe_fds[0], buf, 1);
         }
     }
     wait(NULL);
@@ -67,7 +70,6 @@ int main(int argc, char *argv[]) {
  */
 
 /*
- * I ran 100,000 context switches in 349 microseconds using a single performance core with `taskpolicy -b`. This
- * averages out to be 0.00349ms per context switch. This seems extremely fast. I may not have been able to
- * isolate my 2 processes out on a single CPU.
+ * I ran 100,000 context switches in 120,774 microseconds using a single performance core with `taskpolicy -b`. This
+ * averages out to be 1.2 microsecond per context switch.
  */
