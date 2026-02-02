@@ -50,8 +50,8 @@ int main(int argc, char *argv[]) {
         }
         return 0;
     } else {
-        char buf[1];
         // Parent
+        char buf[1];
         for (int i = 0; i < 100000; ++i) {
             write(pipe_fds[1], "b", 1);
             read(pipe_fds[0], buf, 1);
