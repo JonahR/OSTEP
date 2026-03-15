@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
         printf("usage: %s <size in MB>\n", argv[0]);
     }
 
-    int bytes = 100000 * atoi(argv[1]);
+    int bytes = 1000000 * atoi(argv[1]);
     char *array = (char *) malloc(sizeof(char) * bytes);
     while (1) {
         for (int i = 0; i < bytes; i++) {
